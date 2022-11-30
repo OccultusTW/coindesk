@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 public class CurrencyReq {
     @JsonProperty("code")
     @NotBlank
-    @Size(max = 30)
+    @Size(max = 20)
     private String code;
     @JsonProperty("codeZh")
     @Size(max = 255)
