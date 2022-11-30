@@ -1,9 +1,11 @@
 package com.cathaybank.coindesk.dto.telegram;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class CoinDeskUpdatedTime {
     @JsonProperty("updated")
     private String updated;

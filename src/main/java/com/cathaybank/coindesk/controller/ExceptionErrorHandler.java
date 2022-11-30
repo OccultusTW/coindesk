@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExceptionErrorHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> onRequestException(Exception e) {
-        ResponseEntity<String> entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<String> entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
         log.error(e.getMessage(), e);
         return entity;

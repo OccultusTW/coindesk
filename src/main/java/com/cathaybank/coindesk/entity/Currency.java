@@ -16,6 +16,6 @@ public class Currency {
     @Id
     @Column(name = "CODE")
     private String code;
-    @Column(name = "CODE_Zh")
+    @Column(name = "CODE_ZH")
     private String codeZh;
 }

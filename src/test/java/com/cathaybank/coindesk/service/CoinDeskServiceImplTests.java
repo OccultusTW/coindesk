@@ -5,6 +5,7 @@ import com.cathaybank.coindesk.dto.telegram.CoinDeskBpi;
 import com.cathaybank.coindesk.dto.telegram.CoinDeskRes;
 import com.cathaybank.coindesk.dto.telegram.CoinDeskUpdatedTime;
 import com.cathaybank.coindesk.service.impl.CoinDeskServiceImpl;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,14 +23,14 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class CoinDeskServiceImplTests {
+class CoinDeskServiceImplTests {
     @InjectMocks
     private CoinDeskServiceImpl coinDeskServiceImpl;
     @Mock
     private CathayBankAPIComponent cathayBankAPIComponent;
 
     @Test
-    public void callCoinDeskAPI_isSuccess_returnResult() throws Exception {
+    void callCoinDeskAPI_isSuccess_returnResult() {
         CoinDeskRes coinDeskRes = new CoinDeskRes();
         coinDeskRes.setChartName("Bitcoin");
         coinDeskRes.setDisclaimer("This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org");
@@ -55,11 +53,11 @@ public class CoinDeskServiceImplTests {
 
         when(cathayBankAPIComponent.callCoinDesk()).thenReturn(coinDeskRes);
 
-        coinDeskServiceImpl.callCoinDeskAPI();
+        Assertions.assertDoesNotThrow(() -> coinDeskServiceImpl.callCoinDeskAPI());
     }
 
     @Test
-    public void callCoinDeskAPI_occurError_throwException() throws Exception {
+    void callCoinDeskAPI_occurError_throwException() {
         when(cathayBankAPIComponent.callCoinDesk()).thenThrow(new RuntimeException(""));
 
         Assertions.assertThrows(RuntimeException.class, () -> coinDeskServiceImpl.callCoinDeskAPI());

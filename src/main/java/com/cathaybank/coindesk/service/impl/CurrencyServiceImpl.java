@@ -9,6 +9,7 @@ import com.cathaybank.coindesk.dto.MergeCurrencyRes;
 import com.cathaybank.coindesk.dto.telegram.CoinDeskBpi;
 import com.cathaybank.coindesk.dto.telegram.CoinDeskRes;
 import com.cathaybank.coindesk.entity.Currency;
+import com.cathaybank.coindesk.exception.CurrencyException;
 import com.cathaybank.coindesk.repository.CurrencyRepo;
 import com.cathaybank.coindesk.service.CurrencyService;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     public void create(CurrencyReq currencyReq) {
         if(currencyRepo.existsById(currencyReq.getCode())) {
-            throw new RuntimeException("Currency already exist");
+            throw new CurrencyException("Currency already exist");
         }
 
         Currency currency = new Currency();
@@ -57,7 +58,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     public CurrencyRes update(CurrencyReq currencyReq) {
         if(!currencyRepo.existsById(currencyReq.getCode())) {
-            throw new RuntimeException("Currency not exist");
+            throw new CurrencyException("Currency not exist");
         }
 
         Currency currency = new Currency();

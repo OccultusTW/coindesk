@@ -1,11 +1,13 @@
 package com.cathaybank.coindesk.dto.telegram;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
-@Data
+@Getter
+@Setter
 public class CoinDeskRes {
     @JsonProperty("time")
     private CoinDeskUpdatedTime time;
